@@ -1,0 +1,68 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Submit a kOS script !</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="name">Name</label>
+  <div class="controls">
+    <input id="name" name="name" placeholder="My awesome script" class="input-xlarge" required="" type="text">
+    <p class="help-block">Enter any name you want.</p>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="control-group">
+  <label class="control-label" for="code">Code</label>
+  <div class="controls">                     
+    <textarea id="code" name="code">print "Paste your code here!".</textarea>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="type">Script type</label>
+  <div class="controls">
+    <label class="radio" for="type-0">
+      <input name="type" id="type-0" value="One-time run script" checked="checked" type="radio">
+      One-time run script
+    </label>
+    <label class="radio" for="type-1">
+      <input name="type" id="type-1" value="Function" type="radio">
+      Function
+    </label>
+    <label class="radio" for="type-2">
+      <input name="type" id="type-2" value="Utility script" type="radio">
+      Utility script
+    </label>
+  </div>
+</div>
+
+<!-- Select Multiple -->
+<div class="control-group">
+  <label class="control-label" for="cat">Category</label>
+  <div class="controls">
+    <select id="cat" name="cat" class="input-xlarge" multiple="multiple">
+      <option>Launch</option>
+      <option>Orbital Maneuvers</option>
+      <option>Landing</option>
+      <option>Atmosphere Autopilot</option>
+      <option>I/O</option>
+      <option>Utility</option>
+      <option>Other</option>
+    </select>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="control-group">
+  <label class="control-label" for="submit"></label>
+  <div class="controls">
+    <button id="submit" name="submit" class="btn btn-primary">Submit!</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
