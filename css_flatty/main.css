@@ -119,6 +119,16 @@ i {
 	color: #3498db; 
 }
 
+.profile-avatar {
+	max-height: 128px;
+	border-radius: 0.1, 0.1;
+}
+.profile-bio {
+	font-style: italic;
+	color: rgb(149, 165, 166);
+	font-size: 13px;
+}
+
 
 /* HeaderWrap */
 #headerwrap {

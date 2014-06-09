@@ -24,7 +24,7 @@ if(!$mysqli->connect_errno)
 			//$result = $stmt->get_result();
 			//$author = $result->fetch_assoc();
 			$author = array();
-			$stmt->bind_result($author['ID'], $author['Name'], $author['psswd'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail']);
+			$stmt->bind_result($author['ID'], $author['Name'], $author['psswd'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail'], $author['Avatar'], $author['Biography']);
 			$stmt->fetch();
 			$stmt->close();
 		}
@@ -51,6 +51,7 @@ if(!$mysqli->connect_errno)
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="stylesheet" href="css_flatty/bootstrap.css" />
 		<link rel="stylesheet" href="css_flatty/main.css" />
+		
 	</head>
 
 	<body>
@@ -87,7 +88,10 @@ if(!$mysqli->connect_errno)
 					<p>Downloads: <?php echo $script['DL']; ?> | Likes: <?php echo $script['Likes']; ?></p>
 				</div>
 				<div class="col-lg-4">
-					<h3>by <b><?php echo $author['Name']; ?></b></h3>
+					<?php if($author['Avatar'] != null) { ?>
+						<img class="profile-avatar" src="<?php echo 'img/avatar/' . $author['Avatar']; ?>" alt="[Avatar]" /><?php
+					} ?>
+					<h3>by <a href="author.php?id=<?php echo $author['ID']; ?>"<b><?php echo $author['Name']; ?></b></a></h3>
 					<h4>Joined on <?php echo date_format(date_create($author['RegDate']), "F d, Y"); ?></h4>
 					<?php if($author['ShareEmail'] == 1) { ?>
 						Email: <?php echo '<a href="mailto:' . $author['Email'] . '">' . $author['Email'] . '</a><br/>';
@@ -110,7 +114,8 @@ if(!$mysqli->connect_errno)
 					</form>
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					<form class="form-inline" role="form" id="dl">
+					<form class="form-inline" role="form" action="download.php" method="get">
+						<input type="hidden" name="id" value="<?php echo $script['ID']; ?>" />
 						<button class="btn btn-default btn-lg" type="submit">Download</button>
 					</form>
 				</div>
