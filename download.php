@@ -7,8 +7,6 @@ if(!$mysqli->connect_errno)
 	{
 		$stmt->bind_param("i", $_GET['id']);
 		$stmt->execute();
-		//$result = $stmt->get_result();
-		//$script = $result->fetch_assoc();
 		$script = array();
 		$stmt->bind_result($script['Name'], $script['Author'], $script['Code'], $script['DL']);
 		$stmt->fetch();
