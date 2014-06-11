@@ -89,8 +89,17 @@
 									?>
 								</div>
 								<div class="panel-footer">
+									<?php
+									if($stmt=$mysqli->prepare("SELECT ID FROM users WHERE Name=?"))
+									{
+										$stmt->bind_param("s", $row['Author']);
+										$stmt->execute();
+										$stmt->bind_result($authorID);
+										$stmt->fetch();
+										$stmt->close();
+									} ?>
 									<ul class="list-unstyled">
-										<li>Author: <?php echo '<a href="author.php?id=42">' . $row['Author'] . '</a>'; ?></li>
+										<li>Author: <?php echo '<a href="author.php?id='.$authorID.'">' . $row['Author'] . '</a>'; ?></li>
 										<li>Category: <b><?php echo $category[$row['Category']]; ?></b></li>
 										<li>Type: <b><?php echo $type[$row['Type']]; ?></b></li>
 										<li>Downloads: <?php echo $row['DL']; ?> |

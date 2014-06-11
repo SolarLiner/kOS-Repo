@@ -120,7 +120,11 @@ i {
 }
 
 .profile-avatar {
-	max-height: 128px;
+	height: 128px;
+	border-radius: 0.1, 0.1;
+}
+.profile-avatar-big {
+	height: 512px;
 	border-radius: 0.1, 0.1;
 }
 .profile-bio {
@@ -160,6 +164,9 @@ i {
 	font-size: 45px;
 	font-weight: 300;
 	letter-spacing: 1px;
+}
+#headerwrap h3 {
+	color: #666666;
 }
 .launch {
 	background: url("../img/launch.jpg");

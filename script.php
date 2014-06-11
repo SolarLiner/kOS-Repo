@@ -17,14 +17,14 @@ if(!$mysqli->connect_errno)
 		$stmt->fetch();
 		$stmt->close();
 	
-		if($stmt = $mysqli->prepare("SELECT * FROM users WHERE Name=?"))
+		if($stmt = $mysqli->prepare("SELECT ID, Name, Email, Twitter, RegDate, ShareEmail, Avatar FROM users WHERE Name=?"))
 		{
 			$stmt->bind_param("s", $script['Author']);
 			$stmt->execute();
 			//$result = $stmt->get_result();
 			//$author = $result->fetch_assoc();
 			$author = array();
-			$stmt->bind_result($author['ID'], $author['Name'], $author['psswd'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail'], $author['Avatar'], $author['Biography']);
+			$stmt->bind_result($author['ID'], $author['Name'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail'], $author['Avatar']);
 			$stmt->fetch();
 			$stmt->close();
 		}
@@ -55,19 +55,7 @@ if(!$mysqli->connect_errno)
 	</head>
 
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="landingpage.php"><b>kOS Repo</b></a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="landingpage.php">Home</a></li>
-						<li><a href="index.php">Scripts</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<?php include("include/flatty_header.html"); ?>
 		
 		<?php echo '<div id="headerwrap" class="' . $CSSclass[$script['Category']] . '">'; ?>
 			<div class="container">
