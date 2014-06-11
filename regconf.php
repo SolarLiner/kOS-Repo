@@ -34,7 +34,7 @@
 			
 			$pathInfo = pathinfo($_FILES['avatar']['name']);
 			$extension = $pathInfo['extension'];
-			$avatar_path = 'img/avatar/' . $_POST['name'] . '.' . $extension;
+			$avatar_path = $_POST['name'] . '.' . $extension;
 			
 			$date = date("Y-m-d");
 			
@@ -43,7 +43,7 @@
 							  $_POST['name'],
 							  $MD5, 
 							  $_POST['email'],
-							  $_POST['Twitter'],
+							  $_POST['twitter'],
 							  $date,
 							  $sharemail,
 							  $avatar_path,

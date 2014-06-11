@@ -112,7 +112,7 @@
 					  <label class="col-md-4 control-label" for="avatar">Avatar</label>
 					  <div class="col-md-4">
 					    <input id="avatar" name="avatar" class="input-file" type="file">
-					    <p class="help-block">Max <b>8 Mo</b>. JPG, PNG, GIF images accepted.</p>
+					    <p class="help-block">Max <b>4 Mo</b>. JPG, PNG, GIF images accepted.</p>
 					  </div>
 					</div>
 					
