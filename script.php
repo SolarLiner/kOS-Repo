@@ -52,9 +52,12 @@ if(!$mysqli->connect_errno)
 		<link rel="stylesheet" href="css_flatty/bootstrap.css" />
 		<link rel="stylesheet" href="css_flatty/main.css" />
 		
+		<script src="js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+		<script src="include/highlight_script.js" type="text/javascript" charset="utf-8" />
+		
 	</head>
 
-	<body>
+	<body onload="prettyPrint()">
 		<?php include("include/flatty_header.html"); ?>
 		
 		<?php echo '<div id="headerwrap" class="' . $CSSclass[$script['Category']] . '">'; ?>
@@ -90,7 +93,7 @@ if(!$mysqli->connect_errno)
 				</div>
 			</div>
 			<div class="row mt centered">
-				<pre><?php echo nl2br(htmlspecialchars($script['Code'])); ?></pre>
+				<pre class="kos"><?php echo nl2br(htmlspecialchars($script['Code'])); ?></pre>
 			</div>
 			<hr/>
 			<div class="row centered">
@@ -108,10 +111,5 @@ if(!$mysqli->connect_errno)
 			</div>
 			<hr/>
 		</div>
-		
-		<h1></h1>
-		
-		<!-- Javascript at the end: faster page load -->
-		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 	</body>
 </html>
