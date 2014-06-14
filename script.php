@@ -90,9 +90,7 @@ if(!$mysqli->connect_errno)
 				</div>
 			</div>
 			<div class="row mt centered">
-				<?php
-				// TODO: Make syntax colouring here.
-				echo '<code>' . nl2br(htmlspecialchars($script['Code'])) . '</code>'; ?>
+				<pre><?php echo nl2br(htmlspecialchars($script['Code'])); ?></pre>
 			</div>
 			<hr/>
 			<div class="row centered">
@@ -112,5 +110,8 @@ if(!$mysqli->connect_errno)
 		</div>
 		
 		<h1></h1>
+		
+		<!-- Javascript at the end: faster page load -->
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 	</body>
 </html>
