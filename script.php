@@ -52,12 +52,10 @@ if(!$mysqli->connect_errno)
 		<link rel="stylesheet" href="css_flatty/bootstrap.css" />
 		<link rel="stylesheet" href="css_flatty/main.css" />
 		
-		<script src="js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
-		<script src="include/highlight_script.js" type="text/javascript" charset="utf-8" />
-		
+		<link rel="stylesheet" href="css_raimbow/obsidian.css" />
 	</head>
 
-	<body onload="prettyPrint()">
+	<body>
 		<?php include("include/flatty_header.html"); ?>
 		
 		<?php echo '<div id="headerwrap" class="' . $CSSclass[$script['Category']] . '">'; ?>
@@ -93,7 +91,9 @@ if(!$mysqli->connect_errno)
 				</div>
 			</div>
 			<div class="row mt centered">
-				<pre class="kos"><?php echo nl2br(htmlspecialchars($script['Code'])); ?></pre>
+				<div class="col-sm-12">
+					<pre><code data-language="kos"><?php echo htmlspecialchars($script['Code']); ?></code></pre>
+				</div>
 			</div>
 			<hr/>
 			<div class="row centered">
@@ -111,5 +111,19 @@ if(!$mysqli->connect_errno)
 			</div>
 			<hr/>
 		</div>
+		
+		<script src="js/vendor/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vendor/smoothscroll.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/rainbow.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rainbow.linesnumbers.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/highlight_script.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+			function goToAnchor(anchor) {
+			    document.body.scrollTop = document.documentElement.scrollTop =
+			        document.getElementById(anchor).offsetTop-window.innerHeight/2;
+			}
+		</script>
 	</body>
 </html>

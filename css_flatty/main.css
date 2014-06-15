@@ -133,6 +133,10 @@ i {
 	font-size: 13px;
 }
 
+pre, code {
+	font-family: Consolas, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align: left;
+}
 
 /* HeaderWrap */
 #headerwrap {
