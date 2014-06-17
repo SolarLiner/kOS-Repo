@@ -1,0 +1,23 @@
+<!-- Full Screen Search -->
+<div id="search">
+	<button type="button" class="close">&times;</button>
+		<form action="search.php" method="get">
+			<input id="q" name="q" type="search" value="" placeholder="type keyword(s) here" />
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+</div>
+<script type="text/javascript" charset="utf-8">
+	$(function () {
+	    $('a[href="#search"]').on('click', function(event) {
+	        event.preventDefault();
+	        $('#search').addClass('open');
+	        $('#search > form > input[type="search"]').focus();
+	    });
+	    
+	    $('#search, #search button.close').on('click keyup', function(event) {
+	        if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+	            $(this).removeClass('open');
+	        }
+	    });
+	});
+</script>
