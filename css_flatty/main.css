@@ -95,6 +95,16 @@ a:after {
 
 .navbar-default .navbar-brand {
 	color: white;
+	padding-left: 0px;
+	
+	-webkit-transition: padding 0.1s ease-in-out;
+	-moz-transition: padding 0.1s ease-in-out;
+	-ms-transition: padding 0.1s ease-in-out;
+	-o-transition: padding 0.1s ease-in-out;
+	transition: padding 0.1s ease-in-out;
+}
+.navbar-brand:hover {
+	padding: 15px;		
 }
 
 .navbar-default .navbar-nav > li > a {

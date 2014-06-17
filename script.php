@@ -112,8 +112,9 @@ if(!$mysqli->connect_errno)
 			<hr/>
 		</div>
 		
-		<script src="js/vendor/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/vendor/smoothscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<!--<script src="js/vendor/smoothscroll.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		
 		<script src="js/rainbow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rainbow.linesnumbers.min.js" type="text/javascript" charset="utf-8"></script>
