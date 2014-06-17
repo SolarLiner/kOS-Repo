@@ -28,32 +28,55 @@
 	include("include/database.php");
 	
 	$query="SELECT * FROM scripts ORDER BY Date DESC";
+
+	$nav = '<li';
 	
 	if(isset($_GET['mode']))
 	{
 		if($_GET['mode']=="top")
 		{
 			$query="SELECT * FROM scripts ORDER BY Likes DESC";
+			
+			$nav .= '><a href="index.php">New</a></li>';
+			$nav .= '<li class="active"><a href="index.php?mode=top">Top Rated</a></li>';
+			$nav .= '<li><a href="index.php?mode=dwl">Most Downloaded</a></li>';
+			$nav .= '<li><a href="index.php?mode=ris">Rising</a></li>';
 		}
-		else if($_GET['mode']=="dwl")
+		elseif($_GET['mode']=="dwl")
 		{
 			$query="SELECT * FROM scripts ORDER BY DL DESC";
+			
+			$nav .= '><a href="index.php">New</a></li>';
+			$nav .= '<li><a href="index.php?mode=top">Top Rated</a></li>';
+			$nav .= '<li class="active"><a href="index.php?mode=dwl">Most Downloaded</a></li>';
+			$nav .= '<li><a href="index.php?mode=ris">Rising</a></li>';
 		}
+		else {
+			$nav .= ' class="active"><a href="index.php">New</a></li>';
+			$nav .= '<li><a href="index.php?mode=top">Top Rated</a></li>';
+			$nav .= '<li><a href="index.php?mode=dwl">Most Downloaded</a></li>';
+			$nav .= '<li><a href="index.php?mode=ris">Rising</a></li>';
+		}		
+	}
+	else {
+		$nav .= ' class="active"><a href="index.php">New</a></li>';
+		$nav .= '<li><a href="index.php?mode=top">Top Rated</a></li>';
+		$nav .= '<li><a href="index.php?mode=dwl">Most Downloaded</a></li>';
+		$nav .= '<li><a href="index.php?mode=ris">Rising</a></li>';
 	}
 	?>
   <body>
-  	<header class="col-sm-12">
-  		<h1>kOS Repository</h1>
-  		<h3>This might hold an useful script for you</h3>
-  	</header>
-	<nav id="navbar-collapse2" class="collapse navbar-collapse">
-		<ul class="nav navbar-nav navbar-right">
-			<li class="active"><a href="index.php">New</a></li>
-			<li><a href="index.php?mode=top">Top Rated</a></li>
-			<li><a href="index.php?mode=dwl">Most Downloaded</a></li>
-			<li><a href="index.php?mode=ris">Rising</a></li>
-		</ul>
-	</nav>
+  	<?php include("include/gplus_header.php"); ?>
+  	<div id="subnav" class="navbar navbar-default">
+		<div class="col-lg-12">
+			<?php include("include/gplus_header_home.php"); ?>
+			<div class="collapse navbar-collapse" id="navbar-collapse2">
+		        <ul class="nav navbar-nav navbar-right">
+					<?php echo $nav; ?>
+		        </ul>
+	        </div>
+		</div>
+	</div>
 	<div id="main" class="container">
 		<div class="row">
 			<div class="col-sm-12">
@@ -147,7 +170,20 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    
+    <!-- Google Analytics -->
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-52015533-1', 'uphero.com');
+	  ga('send', 'pageview');
+	</script>
+	
+	<?php include("include/search.html"); ?>
   </body>
 </html>

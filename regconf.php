@@ -8,13 +8,24 @@
 		$reg_successful=false;
 		if(isset($_POST['name']) AND isset($_POST['psswd']))
 		{
-			$reg_successful=true;
-			if(isset($_FILES['avatar']))
+			if($stmt=$mysqli->prepare("SELECT COUNT(Name) IN users WHERE Name=?"))
 			{
-				if($_FILES['avatar']['error'] == 0)
+				$stmt->bind_param("s", $_POST['name']);
+				$stmt->execute();
+				$stmt->bind_result($nameCount); // Should be zero, right?
+				$stmt->close();		
+				
+				if($nameCount==0)
 				{
-					$pathInfo = pathinfo($_FILES['avatar']['name']);
-					$reg_succssful = in_array($pathInfo['extension'], array("jpg", "png", "gif"));
+					$reg_successful=true;
+					if(isset($_FILES['avatar']))
+					{
+						if($_FILES['avatar']['error'] == 0)
+						{
+							$pathInfo = pathinfo($_FILES['avatar']['name']);
+							$reg_succssful = in_array($pathInfo['extension'], array("jpg", "png", "gif"));
+						}
+					}
 				}
 			}
 		}
@@ -38,20 +49,27 @@
 			
 			$date = date("Y-m-d");
 			
-			$stmt=$mysqli->prepare("INSERT INTO users(ID, Name, PassWdMD5, Email, Twitter, RegDate, ShareEmail, Avatar, Description) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("sssssiss",
-							  $_POST['name'],
-							  $MD5, 
-							  $_POST['email'],
-							  $_POST['twitter'],
-							  $date,
-							  $sharemail,
-							  $avatar_path,
-							  $_POST['biography']);	
-			$stmt->execute();
-			$stmt->close();
-			
-			move_uploaded_file($_FILES['avatar']['tmp_name'], $avatar_path);
+			if($stmt=$mysqli->prepare("INSERT INTO users(ID, Name, PassWdMD5, Email, Twitter, RegDate, ShareEmail, Avatar, Description) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)"))
+			{
+				$stmt->bind_param("sssssiss",
+								  $_POST['name'],
+								  $MD5, 
+								  $_POST['email'],
+								  $_POST['twitter'],
+								  $date,
+								  $sharemail,
+								  $avatar_path,
+								  $_POST['biography']);	
+				$stmt->execute();
+				$stmt->close();
+				
+				move_uploaded_file($_FILES['avatar']['tmp_name'], $avatar_path);
+			}
+			else
+			{
+				$reg_successful=false;	
+				$error = $mysqli->error;
+			}
 		}
 		
 		?>
@@ -88,8 +106,13 @@
 				<?php if($reg_successful) { ?>
 				<h1>You're now ready to script to a whole new level!</h1><?php
 				}
-				else { ?>
+				elseif (!isset($error)){ ?>
 				<h1>D'oh! You're not completely OKay...</h1><?php
+				}
+				
+				else { ?>
+						<h1>There was an error :(</h1>
+						<?php
 				} ?>
 			</div>
 		</div>
@@ -105,7 +128,7 @@
 					<h3><a href="index.php">Return home</a></h3>
 					<?php
 				}
-				else { ?>
+				elseif(!isset($error)) { ?>
 					<h3>You're missing on some information!</h3>
 					<h4>The following information was not correctly provided:</h4><?php
 					// TODO: Conditional show of the errors
@@ -114,24 +137,20 @@
 						<p class="danger">You didn't give a <b>username</b> :(</p><?php
 					}
 					else
-					{
-						$stmt=$mysqli->prepare("SELECT COUNT FROM users WHERE Name=?");
-						$stmt->bind_param("s", $_POST['name']);
-						$stmt->execute();
-						$stmt->bind_result($Count);
-						$stmt->fetch();
-						$stmt->close();
-						
-						if($Count != 0)
-						{ ?>
-							<p class="danger">The username <b><?php echo htmlspecialchars($_POST['name']); ?></b> is already taken.</p> <?php
-						}
+					{ ?>
+						<p class="danger">The username <b><?php echo htmlspecialchars($_POST['name']); ?></b> is already taken.</p> <?php
 					}
 					
 					if(!isset($_POST['psswd']))
 					{ ?>
 						<p class="danger">You didn't give a password !</p> <?php
 					}
+				}
+				else { ?>
+					<h3>There was an error while trying to register you ...</h3>
+					<h4>Bad luck or developper's fault?</h4>
+					<p class="danger"><?php echo $error; ?></p>
+					<?php
 				}
 				
 				if(isset($_FILES['avatar']))
