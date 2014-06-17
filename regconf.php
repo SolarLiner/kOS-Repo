@@ -5,7 +5,9 @@
 		<?php
 		include("include/database.php");
 		
-		$reg_successful=false;
+		$reg_successful=TRUE;
+		$nameCount=0;
+		
 		if(isset($_POST['name']) AND isset($_POST['psswd']))
 		{
 			if($stmt=$mysqli->prepare("SELECT COUNT(Name) IN users WHERE Name=?"))
@@ -13,11 +15,12 @@
 				$stmt->bind_param("s", $_POST['name']);
 				$stmt->execute();
 				$stmt->bind_result($nameCount); // Should be zero, right?
+				$stmt->fetch();
 				$stmt->close();		
 				
 				if($nameCount==0)
 				{
-					$reg_successful=true;
+					$reg_successful=TRUE;
 					if(isset($_FILES['avatar']))
 					{
 						if($_FILES['avatar']['error'] == 0)
@@ -29,6 +32,9 @@
 				}
 			}
 		}
+		
+		print_r($nameCount);
+		print_r($reg_successful);
 		
 		if($reg_successful)
 		{
@@ -131,12 +137,11 @@
 				elseif(!isset($error)) { ?>
 					<h3>You're missing on some information!</h3>
 					<h4>The following information was not correctly provided:</h4><?php
-					// TODO: Conditional show of the errors
 					if(!isset($_POST['name']))
 					{ ?>
 						<p class="danger">You didn't give a <b>username</b> :(</p><?php
 					}
-					else
+					elseif($nameCount!=0)
 					{ ?>
 						<p class="danger">The username <b><?php echo htmlspecialchars($_POST['name']); ?></b> is already taken.</p> <?php
 					}
