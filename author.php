@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<?php
+<?php session_start();
+$refer = "author.php?id=".$_GET['id'];
+
+include("include/session.php");
 include("include/Parsedown.php");
 include("include/cat_types.php");
 include("include/database.php");
@@ -31,6 +33,7 @@ if(!$mysqli->connect_errno)
 }
 	
 ?>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -53,7 +56,7 @@ if(!$mysqli->connect_errno)
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<?php include("include/flatty_header.php"); ?>
 		
 		<div id="headerwrap">
 			<div class="row centered">

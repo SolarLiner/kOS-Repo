@@ -1,3 +1,8 @@
+<?php session_start();
+$refer = "search.php";
+
+include("include/session.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

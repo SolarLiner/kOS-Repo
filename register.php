@@ -1,3 +1,4 @@
+<?php $refer = "index.php"; ?>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -28,7 +29,7 @@
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<?php include("include/flatty_header.php"); ?>
 		
 		<div id="headerwrap" class="registration">
 			<div class="col-lg-6 col-lg-offset-3 col-sm-12">

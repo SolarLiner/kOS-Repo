@@ -145,7 +145,13 @@ else // Showing login page
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+		            <a class="navbar-brand" href="/">kOS Repo</a>
+		        </div>
+			</div>
+		</div>
 		<div id="headerwrap" class="login">
 			<div class="container">
 				<div class="row centered">

@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<?php
+<?php session_start();
+$refer = "script.php?id=".$_GET['id'];
+
+include("include/session.php");
+
 include("include/Parsedown.php");
 include("include/cat_types.php");
 include("include/database.php");
@@ -32,6 +35,7 @@ if(!$mysqli->connect_errno)
 }
 
 ?>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">

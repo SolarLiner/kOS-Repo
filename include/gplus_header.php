@@ -14,7 +14,7 @@
 		<div id="navbar-collapse1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="register.php">Register</a></li>
-				<li><a href="login.php">Log in</a></li>
+				<li><a href="login.php?refer=<?php echo $refer; ?>">Log in</a></li>
 			</ul>
 		</div>
 	</div>
