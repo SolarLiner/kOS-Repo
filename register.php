@@ -41,7 +41,7 @@
 					Using an autopilot? Nah, who needs autopilots anyway?<br/>
 					Creating your OWN program to launch your rocket? Yeah, that's the way to do it!
 				</h3><br/>
-				<h3>NASA, JAXA, SpaceX; all use custom autopilots.</h3>
+				<h3>KASA, JAKA, SpaceK; all use custom autopilots.</h3>
 				<h1>Be one of them. Be like them. Register yourself NOW!</h1>
 				<h3>Now 100% more registrable and FREE!</h3>
 			</div>
