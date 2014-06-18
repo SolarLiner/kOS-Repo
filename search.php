@@ -61,7 +61,7 @@
 						<h3>Searching for &quot;<b><?php echo $decoded; ?></b>&quot;: </h3>
 					</div>
 					<div class="panel-body">
-						<p>The search returned <?php echo $stmt->num_rows() . ' result' . ($stmt->num_rows==1?'':'s'); ?>.</p>
+						<p>The search returned <?php echo $stmt->num_rows . ' result' . ($stmt->num_rows==1?'':'s'); ?>.</p>
 					</div><?php if($safe_os==1 AND $compatible_browser) {
 						if($name == "Firefox") $link = 'http://www-archive.mozilla.org/docs/end-user/keywords.html';
 						elseif($name == "Chrome") $link = 'https://support.google.com/chrome/answer/95653?hl=en';

@@ -1,3 +1,32 @@
+<?php session_start();
+
+include("include/database.php");
+
+$active_session = isset($_SESSION['ID']);
+if($active_session) $active_session = !empty($_SESSION['Name']);
+
+if(!$active_session && isset($_COOKIE['SSID'])){
+	
+	if($stmt=$mysqli->prepare("SELECT ID, Name FROM users WHERE SSID = ?"))
+	{
+		$stmt->bind_param("s", $_COOKIE['SSID']);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($id, $name);
+		$stmt->fetch();
+		
+		if($stmt->num_rows != 0)
+		{
+			$active_session=true;
+			
+			$_SESSION['ID'] = $id;
+			$_SESSION['Name'] = $name;
+		}
+		unset($id);
+		unset($name);
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +54,6 @@
 	<?php
 	include("include/Parsedown.php");
 	include("include/cat_types.php");
-	include("include/database.php");
 	
 	$query="SELECT * FROM scripts ORDER BY Date DESC";
 
@@ -78,6 +106,29 @@
 		</div>
 	</div>
 	<div id="main" class="container">
+		<?php if(isset($_GET['refer']))
+		{ ?>			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<?php if($_GET['refer'] == "logout") { ?>
+								<h3>You have been successfully deconnected!</h3><?php
+							} elseif($_GET['refer'] == "login") { ?>
+								<h3>You have successfully been logged in!</h3><?php
+							} ?>			
+						</div>
+						<div class="panel-body">
+							<?php if($_GET['refer'] == "logout") { ?>
+								<p>You have been deconnected from the site. Good bye sir!</p><?php
+							} elseif($_GET['refer'] == "login") { ?>
+								<p>You have been successfully logged in, <b><?php echo $_SESSION['name']; ?></b> !</p><?php
+							} ?>
+						</div>
+					</div>				
+				</div>
+			</div><?php
+			} ?>
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="panel panel-primary panel-danger">
