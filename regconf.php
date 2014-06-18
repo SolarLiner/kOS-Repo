@@ -51,7 +51,7 @@
 			
 			$pathInfo = pathinfo($_FILES['avatar']['name']);
 			$extension = $pathInfo['extension'];
-			$avatar_path = $_POST['name'] . '.' . $extension;
+			$avatar_path = 'img/avatar/' . $_POST['name'] . '.' . $extension;
 			
 			$date = date("Y-m-d");
 			

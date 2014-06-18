@@ -99,7 +99,7 @@ include("include/session.php");
 							<?php if($_GET['refer'] == "logout") { ?>
 								<p>You have been deconnected from the site. Good bye sir!</p><?php
 							} elseif($_GET['refer'] == "login") { ?>
-								<p>You have been successfully logged in, <b><?php echo $_SESSION['name']; ?></b> !</p><?php
+								<p>You have been successfully logged in, <b><?php echo $_SESSION['Name']; ?></b> !</p><?php
 							} ?>
 						</div>
 					</div>				

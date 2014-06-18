@@ -80,8 +80,8 @@ if(isset($_POST['name']) AND isset($_POST['password'])) // connect directly
 {
 	include("include/database.php");
 	
-	if(validEmail($_POST['name'])) $query = "SELECT ID, Name, PssWdMD5, SSID FROM users WHERE Email = ?";
-	else $query = "SELECT ID, Name, PssWdMD5 FROM users WHERE Name = ?";
+	if(validEmail($_POST['name'])) $query = "SELECT ID, Name, PassWdMD5, SSID FROM users WHERE Email = ?";
+	else $query = "SELECT ID, Name, PassWdMD5, SSID FROM users WHERE Name = ?";
 	
 	if($stmt=$mysqli->prepare($query))
 	{
@@ -113,7 +113,7 @@ if(isset($_POST['name']) AND isset($_POST['password'])) // connect directly
 		}
 	}
 	else {
-		header("Refresh: 0;url=login.php?refer=".$_GET['refer']."&error=sql&name=".$_POST['name']);
+		header("Refresh: 5;url=login.php?refer=".$_GET['refer']."&error=sql&code=".$mysqli->error."&name=".$_POST['name']);
 	}
 }
 else // Showing login page
@@ -164,16 +164,16 @@ else // Showing login page
 		<?php if(isset($_GET['error'])) { ?>
 			<div class="container">
 				<div class="row mt centered">
-					<div class="col-lg-6 col-lg-offset-2 col-sm-12">
+					<div class="col-lg-6 col-lg-offset-3 col-sm-12">
 						<h1>Whoops ...</h1>
 						<h3>There was a problem while trying to connect you to the site.</h3>
 						<?php
 						if($_GET['error'] == "sql")
 						{
-							echo "<h3>We couldn't connect you to the database. Please try again later or contact the admin.</h3>";
+							echo "<h3>We couldn't connect you to the database. Please try again later and contact the admin with this error: <pre>".$_GET['code']."</pre></h3>";
 						}elseif($_GET['error'] == "psswd")
 						{
-							echo "<h3>It seems that you have not entered the right password. Please try again.</h3>";							
+							echo "<h3>It seems that you have not entered the right username or password. Please try again.</h3>";							
 						} ?>
 					</div>
 				</div>
@@ -182,8 +182,8 @@ else // Showing login page
 		<?php } ?>
 		<div class="container">
 			<div class="row mt">
-				<div class="col-lg-6 col-lg-offset-2 col-sm-12">
-					<form class="form-horizontal">
+				<div class="col-lg-6 col-lg-offset-3 col-sm-12">
+					<form class="form-horizontal" method="post" action="login.php?refer=<?php echo $_GET['refer']; ?>">
 						<fieldset>
 
 							<!-- Form Name -->

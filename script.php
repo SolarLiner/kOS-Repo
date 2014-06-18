@@ -60,7 +60,7 @@ if(!$mysqli->connect_errno)
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<?php include("include/flatty_header.php"); ?>
 		
 		<?php echo '<div id="headerwrap" class="' . $CSSclass[$script['Category']] . '">'; ?>
 			<div class="container">
