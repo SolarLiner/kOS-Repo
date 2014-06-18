@@ -102,7 +102,7 @@ if(isset($_POST['name']) AND isset($_POST['password'])) // connect directly
 			{
 				if($_POST['remember'] == "Yes")
 				{
-					setcookie("SSID", $_POST['SSID'], time()+60*60*24*30);
+					setcookie("SSID", $result['SSID'], time()+60*60*24*30);
 				}	
 			}
 			
