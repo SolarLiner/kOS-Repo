@@ -1,4 +1,9 @@
-<?php $active_session = (isset($active_session)?$active_session:false); ?>
+<?php //$active_session = (isset($active_session)?$active_session:false);
+if(!isset($active_session))
+{
+	$active_session = false;
+}
+ ?>
 
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
