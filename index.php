@@ -1,3 +1,9 @@
+<?php session_start();
+$refer = "index.php";
+
+include("include/database.php");
+include("include/session.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +31,6 @@
 	<?php
 	include("include/Parsedown.php");
 	include("include/cat_types.php");
-	include("include/database.php");
 	
 	$query="SELECT * FROM scripts ORDER BY Date DESC";
 
@@ -78,6 +83,29 @@
 		</div>
 	</div>
 	<div id="main" class="container">
+		<?php if(isset($_GET['refer']))
+		{ ?>			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<?php if($_GET['refer'] == "logout") { ?>
+								<h3>You have been successfully deconnected!</h3><?php
+							} elseif($_GET['refer'] == "login") { ?>
+								<h3>You have successfully been logged in!</h3><?php
+							} ?>			
+						</div>
+						<div class="panel-body">
+							<?php if($_GET['refer'] == "logout") { ?>
+								<p>You have been deconnected from the site. Good bye sir!</p><?php
+							} elseif($_GET['refer'] == "login") { ?>
+								<p>You have been successfully logged in, <b><?php echo $_SESSION['Name']; ?></b> !</p><?php
+							} ?>
+						</div>
+					</div>				
+				</div>
+			</div><?php
+			} ?>
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="panel panel-primary panel-danger">
@@ -173,16 +201,7 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     
-    <!-- Google Analytics -->
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
-	  ga('create', 'UA-52015533-1', 'uphero.com');
-	  ga('send', 'pageview');
-	</script>
+    <?php include("include/ga.php"); ?>
 	
 	<?php include("include/search.html"); ?>
   </body>

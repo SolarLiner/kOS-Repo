@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<?php
+<?php session_start();
+$refer = "author.php?id=".$_GET['id'];
+
+include("include/session.php");
 include("include/Parsedown.php");
 include("include/cat_types.php");
 include("include/database.php");
@@ -8,14 +10,14 @@ $markdown = new Parsedown();
 
 if(!$mysqli->connect_errno)
 {
-	if($stmt=$mysqli->prepare("SELECT * FROM users WHERE ID=?"))
+	if($stmt=$mysqli->prepare("SELECT ID, Name, Email, Twitter, RegDate, ShareEmail, Avatar, Description FROM users WHERE ID=?"))
 	{
 		$stmt->bind_param("i", $_GET['id']);
 		$stmt->execute();
 		//$result = $stmt->get_result();
 		//$author = $result->fetch_assoc();
 		$author = array();
-		$stmt->bind_result($author['ID'], $author['Name'], $author['psswd'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail'], $author['Avatar'], $author['Biography']);
+		$stmt->bind_result($author['ID'], $author['Name'], $author['Email'], $author['Twitter'], $author['RegDate'], $author['ShareEmail'], $author['Avatar'], $author['Biography']);
 		$stmt->fetch();
 		$stmt->close();
 		
@@ -31,6 +33,7 @@ if(!$mysqli->connect_errno)
 }
 	
 ?>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -53,7 +56,7 @@ if(!$mysqli->connect_errno)
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<?php include("include/flatty_header.php"); ?>
 		
 		<div id="headerwrap">
 			<div class="row centered">
@@ -96,15 +99,6 @@ if(!$mysqli->connect_errno)
 			} ?>
 		</div>
 		
-		<!-- Google Analytics -->
-	    <script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
-		  ga('create', 'UA-52015533-1', 'uphero.com');
-		  ga('send', 'pageview');
-		</script>
+		<?php include("include/ga.php"); ?>
 	</body>
 </html>

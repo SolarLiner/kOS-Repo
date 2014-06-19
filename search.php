@@ -1,3 +1,8 @@
+<?php session_start();
+$refer = "search.php";
+
+include("include/session.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -61,7 +66,7 @@
 						<h3>Searching for &quot;<b><?php echo $decoded; ?></b>&quot;: </h3>
 					</div>
 					<div class="panel-body">
-						<p>The search returned <?php echo $stmt->num_rows() . ' result' . ($stmt->num_rows==1?'':'s'); ?>.</p>
+						<p>The search returned <?php echo $stmt->num_rows . ' result' . ($stmt->num_rows==1?'':'s'); ?>.</p>
 					</div><?php if($safe_os==1 AND $compatible_browser) {
 						if($name == "Firefox") $link = 'http://www-archive.mozilla.org/docs/end-user/keywords.html';
 						elseif($name == "Chrome") $link = 'https://support.google.com/chrome/answer/95653?hl=en';
@@ -165,16 +170,7 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     
-    <!-- Google Analytics -->
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
-	  ga('create', 'UA-52015533-1', 'uphero.com');
-	  ga('send', 'pageview');
-	</script>
+    <?php include("include/ga.php"); ?>
 	
 	<?php include("include/search.html"); ?>
   </body>

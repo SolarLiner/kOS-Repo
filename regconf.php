@@ -51,13 +51,15 @@
 			
 			$pathInfo = pathinfo($_FILES['avatar']['name']);
 			$extension = $pathInfo['extension'];
-			$avatar_path = $_POST['name'] . '.' . $extension;
+			$avatar_path = 'img/avatar/' . $_POST['name'] . '.' . $extension;
 			
 			$date = date("Y-m-d");
 			
-			if($stmt=$mysqli->prepare("INSERT INTO users(ID, Name, PassWdMD5, Email, Twitter, RegDate, ShareEmail, Avatar, Description) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)"))
+			$ssid = MD5($_POST['biography']+$_POST['name']+$_FILES['avatar']['tmp_name']."@kosrepo");
+			
+			if($stmt=$mysqli->prepare("INSERT INTO users(ID, Name, PassWdMD5, Email, Twitter, RegDate, ShareEmail, Avatar, Description, SSID) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)"))
 			{
-				$stmt->bind_param("sssssiss",
+				$stmt->bind_param("sssssisss",
 								  $_POST['name'],
 								  $MD5, 
 								  $_POST['email'],
@@ -65,7 +67,8 @@
 								  $date,
 								  $sharemail,
 								  $avatar_path,
-								  $_POST['biography']);	
+								  $_POST['biography'],
+								  $ssid);	
 				$stmt->execute();
 				$stmt->close();
 				

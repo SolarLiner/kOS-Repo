@@ -1,3 +1,4 @@
+<?php $refer = "index.php"; ?>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -28,7 +29,7 @@
 	</head>
 
 	<body>
-		<?php include("include/flatty_header.html"); ?>
+		<?php include("include/flatty_header.php"); ?>
 		
 		<div id="headerwrap" class="registration">
 			<div class="col-lg-6 col-lg-offset-3 col-sm-12">
@@ -41,7 +42,7 @@
 					Using an autopilot? Nah, who needs autopilots anyway?<br/>
 					Creating your OWN program to launch your rocket? Yeah, that's the way to do it!
 				</h3><br/>
-				<h3>NASA, JAXA, SpaceX; all use custom autopilots.</h3>
+				<h3>KASA, JAKA, SpaceK; all use custom autopilots.</h3>
 				<h1>Be one of them. Be like them. Register yourself NOW!</h1>
 				<h3>Now 100% more registrable and FREE!</h3>
 			</div>
@@ -130,15 +131,6 @@
 			</div>
 		</div>
 		
-		<!-- Google Analytics -->
-	    <script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
-		  ga('create', 'UA-52015533-1', 'uphero.com');
-		  ga('send', 'pageview');
-		</script>
+		<?php include("include/ga.php"); ?>
 	</body>
 </html>
