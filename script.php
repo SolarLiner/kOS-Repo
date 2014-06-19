@@ -9,14 +9,14 @@ include("include/database.php");
 
 if(!$mysqli->connect_errno)
 {
-	if($stmt=$mysqli->prepare("SELECT * FROM scripts WHERE ID=?"))
+	if($stmt=$mysqli->prepare("SELECT ID, Name, Author, Description, Date, Type, Category, Code, DL FROM scripts WHERE ID=?"))
 	{
 		$stmt->bind_param("i", $_GET['id']);
 		$stmt->execute();
 		//$result = $stmt->get_result();
 		//$script = $result->fetch_assoc();
 		$script = array();
-		$stmt->bind_result($script['ID'], $script['Name'], $script['Author'], $script['Description'], $script['Date'], $script['Type'], $script['Category'], $script['Code'], $script['DL'], $script['Likes']);
+		$stmt->bind_result($script['ID'], $script['Name'], $script['Author'], $script['Description'], $script['Date'], $script['Type'], $script['Category'], $script['Code'], $script['DL']);
 		$stmt->fetch();
 		$stmt->close();
 	
@@ -78,7 +78,7 @@ if(!$mysqli->connect_errno)
 				<div class="col-lg-6 col-lg-offset-2 col-sm-12">
 					<?php $markdown = new Parsedown();
 					echo '<h3>' . nl2br($markdown->text(htmlspecialchars($script['Description']))) . '</h3>'; ?>
-					<p>Downloads: <?php echo $script['DL']; ?> | Likes: <?php echo $script['Likes']; ?></p>
+					<p>Downloads: <?php echo $script['DL']; ?></p>
 				</div>
 				<div class="col-lg-4">
 					<?php if($author['Avatar'] != null) { ?>

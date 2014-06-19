@@ -153,8 +153,7 @@ include("include/session.php");
 										<li>Author: <?php echo '<a href="author.php?id='.$authorID.'">' . $row['Author'] . '</a>'; ?></li>
 										<li>Category: <b><?php echo $category[$row['Category']]; ?></b></li>
 										<li>Type: <b><?php echo $type[$row['Type']]; ?></b></li>
-										<li>Downloads: <?php echo $row['DL']; ?> |
-											Likes: <?php echo $row['Likes']; ?></li>
+										<li>Downloads: <?php echo $row['DL']; ?></li>
 										<li><?php echo '<a href="script.php?id=' . $row['ID'] . '">View</a>'; ?></li>
 									</ul>
 								</div>

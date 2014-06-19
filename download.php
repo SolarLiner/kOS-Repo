@@ -3,12 +3,12 @@ include("include/database.php");
 
 if(!$mysqli->connect_errno)
 {
-	if($stmt=$mysqli->prepare("SELECT Name, Author, Code, DL FROM scripts WHERE ID=?"))
+	if($stmt=$mysqli->prepare("SELECT Name, fName, Author, Code, DL FROM scripts WHERE ID=?"))
 	{
 		$stmt->bind_param("i", $_GET['id']);
 		$stmt->execute();
 		$script = array();
-		$stmt->bind_result($script['Name'], $script['Author'], $script['Code'], $script['DL']);
+		$stmt->bind_result($script['Name'], $script['fName'], $script['Author'], $script['Code'], $script['DL']);
 		$stmt->fetch();
 		$stmt->close();
 	}
@@ -19,6 +19,7 @@ if(!$mysqli->connect_errno)
 			
 		$stmt->bind_param("ii", $new_dl, $script['ID']);
 		$stmt->execute();
+		$stmt->fetch();
 		$stmt->close();
 	}
 	$script['Name'] = trim($script['Name']);
@@ -26,7 +27,7 @@ if(!$mysqli->connect_errno)
 	$content = "// " . $script['Name'] . " by " . $script['Author'] . "\r\n";
 	$content .= $script['Code'];
 	
-	$fname = str_replace(" ", "_", $script['Name']) . ".txt";
+	$fname = str_replace(" ", "_", $script['fName']) . ".txt";
 	
 	header("Cache-Control: public");
 	header("Content-Description: File Transfer");
