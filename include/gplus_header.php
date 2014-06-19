@@ -1,4 +1,9 @@
-<?php $active_session = (isset($active_session)?$active_session:false); ?>
+<?php //$active_session = (isset($active_session)?$active_session:false);
+if(!isset($active_session))
+{
+	$active_session = false;
+}
+ ?>
 
 <nav class="navbar navbar-fixed-top header">
 	<div class="col-lg-12">
@@ -11,11 +16,11 @@
 		</div>
 		<div id="navbar-collapse1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right"><?php
-			if($active_session) { ?>
+			if(!$active_session) { ?>
 				<li><a href="register.php">Register</a></li>
 				<li><a href="login.php?refer=<?php echo $refer; ?>">Log in</a></li><?php
 			} else { ?>
-				<li>Welcome, <?php echo $_SESSION['Name']; ?></li>
+				<li><a href="author.php?id=<?php echo $_SESSION['ID']; ?>">Welcome, <?php echo $_SESSION['Name']; ?></a></li>
 				<li><a href="logout.php">Log out</a></li><?php
 			} ?>
 			</ul>
