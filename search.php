@@ -73,7 +73,7 @@ include("include/session.php");
 						elseif($name == "Internet Explorer") $link = 'http://www.enhanceie.com/ie/searchbuilder.asp';
 						?>
 					<div class="panel-footer">
-						<p>Did you know you search for scripts in <b><?php echo $name; ?></b> ? <a href="<?php echo $link; ?>" target="_blank">Find out how!</a></p>
+						<p>Did you know you can search for scripts directly in <b><?php echo $name; ?></b> ? <a href="<?php echo $link; ?>" target="_blank">Find out how!</a></p>
 					</div><?php
 					} ?>
 				</div>

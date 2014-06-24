@@ -31,6 +31,15 @@ if(!$mysqli->connect_errno)
 			$stmt->fetch();
 			$stmt->close();
 		}
+		
+		if($stmt=$mysqli->prepare("SELECT AVG(Rank) FROM likes WHERE sID = ?"))
+		{
+			$stmt->bind_param("i", $_GET['id']);
+			$stmt->execute();
+			$stmt->bind_result($rating);
+			$stmt->fetch();
+			$stmt->close();
+		}
 	}
 }
 
@@ -57,6 +66,8 @@ if(!$mysqli->connect_errno)
 		<link rel="stylesheet" href="css_flatty/main.css" />
 		
 		<link rel="stylesheet" href="css_raimbow/obsidian.css" />
+		
+		<link href="css_flatty/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body>
@@ -101,12 +112,13 @@ if(!$mysqli->connect_errno)
 			</div>
 			<hr/>
 			<div class="row centered">
-				<div class="col-lg-3 col-lg-offset-3 col-sm-6">
-					<form class="form-inline" role="form" id="like">
-						<button class="btn btn-warning btn-lg" type="submit">Like</button>
+				<div class="col-sm-8">
+					<form class="form-inline" role="form" method="post" action="like.php?id=<?php echo $_GET['id']; ?>" style="margin-top: -12px;">
+						<input id="rate" type="number" class="rating" data-size="sm" data-rtl="false"/>
+						<span class="alert alert-success hide">Rated !</span>
 					</form>
 				</div>
-				<div class="col-lg-3 col-sm-6">
+				<div class="col-sm-4">
 					<form class="form-inline" role="form" action="download.php" method="get">
 						<input type="hidden" name="id" value="<?php echo $script['ID']; ?>" />
 						<button class="btn btn-default btn-lg" type="submit">Download</button>
@@ -114,7 +126,7 @@ if(!$mysqli->connect_errno)
 				</div>
 			</div>
 			<hr/>
-		</div>	
+		</div>
 		
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 		<!--<script src="js/vendor/smoothscroll.js" type="text/javascript" charset="utf-8"></script>-->
@@ -148,6 +160,23 @@ if(!$mysqli->connect_errno)
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/star-rating.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">
+        $('#rate').rating('update', <?php echo $rating/2; ?>);
+        
+        $('#rate').on('rating.change', function(event, value, caption){
+        	$.ajax({
+        		type: "POST",
+        		url: "AJAX/like.php?id=<?php echo $_GET['id']; ?>",
+        		data: "rate=" + value,
+        		success: function(msg) {
+        			$('.alert').removeClass("hide").show().addClass("in").delay(1000).fadeOut(3500);
+        			console.log(msg);
+        			$('.alert').html(msg);
+        		}
+        	})
+        });
+    </script>
     
     <?php include("include/ga.php"); ?>
 	
